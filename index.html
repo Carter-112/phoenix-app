@@ -295,10 +295,15 @@
             <!-- Signup Section -->
             <section class="signup">
                 <h2>Join the Phoenix Community</h2>
-                <form action="https://formspree.io/f/mgveybvy" method="POST" id="emailForm">
-                    <input type="email" name="email" id="email" placeholder="Enter your email" required>
-                    <button type="submit">Get Early Access</button>
-                </form>
+                <form id="emailForm" action="https://formbold.com/s/your-form-endpoint" method="POST">
+    <input type="email" name="email" id="email" placeholder="Enter your email" required>
+    
+    <!-- Hidden fields for subject and message -->
+    <input type="hidden" name="subject" value="New Phoenix App Tester">
+    <input type="hidden" name="message" id="message">
+    
+    <button type="submit">Get Early Access</button>
+</form>
                 <p class="note">We'll send you updates and add you to the testing group.</p>
             </section>
 
@@ -342,8 +347,15 @@
     document.getElementById('emailForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        // Get the form and its data
+        // Get the form, email input, and message field
         const form = event.target;
+        const email = document.getElementById('email').value;
+        const messageField = document.getElementById('message');
+
+        // Populate the hidden message field
+        messageField.value = `New Phoenix App Tester\nEmail: ${email}\nYou can add the user here: https://tinyurl.com/y8ddx2f2`;
+
+        // Create FormData after populating the hidden message field
         const formData = new FormData(form);
 
         // Show loading message

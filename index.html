@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix - Daily Challenges</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons (Optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXABF+38oO4pUFl1s5uV7iRUBc7qP5ldlrU6QbK4xQ4czK+q4tF+R4+J6uCkPdlXEk7Jp8PQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* ===========================
+           Reset and Base Styles
+        =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            position: relative;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===========================
+           Background Animation
+        =========================== */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===========================
+           Header
+        =========================== */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ff7e5f;
+        }
+
+        header p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: auto;
+            color: #555;
+        }
+
+        /* ===========================
+           Signup Section
+        =========================== */
+        .signup, .already-access {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .signup h2, .already-access h2 {
+            margin-bottom: 20px;
+            color: #ff7e5f;
+        }
+
+        .signup form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signup input[type="email"] {
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #ff7e5f;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .signup input[type="email"]:focus {
+            border-color: #feb47b;
+            outline: none;
+        }
+
+        .signup button {
+            padding: 15px 30px;
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .signup button:hover {
+            background-color: #feb47b;
+            transform: translateY(-2px);
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* ===========================
+           Already Access Section
+        =========================== */
+        .access-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .access-button:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+        }
+
+        /* ===========================
+           Ad Spaces
+        =========================== */
+        .ad {
+            position: fixed;
+            display: none; /* Hidden by default, visible on larger screens */
+        }
+
+        .ad-left {
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .ad-right {
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .ad-bottom {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+        }
+
+        .ad-container {
+            width: 300px;
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #bbb;
+            border-radius: 10px;
+        }
+
+        /* ===========================
+           Responsive Design
+        =========================== */
+        @media (min-width: 1024px) {
+            .ad-left, .ad-right {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .background-animation {
+                background-size: 200% 200%;
+                animation: gradientAnimation 20s ease infinite;
+            }
+
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .signup input[type="email"] {
+                width: 90%;
+            }
+
+            .ad-container {
+                width: 250px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .signup input[type="email"] {
+                width: 100%;
+            }
+
+            .ad-container {
+                width: 100%;
+                height: 150px;
+            }
+
+            .ad-bottom {
+                padding: 20px 0;
+            }
+        }
+
+        /* ===========================
+           Footer
+        =========================== */
+        footer {
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* ===========================
+           Link Styles
+        =========================== */
+        a {
+            color: #ff7e5f;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #feb47b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Phoenix - Daily Challenges</h1>
+            <p>Transform your lifestyle with daily tasks that inspire movement and positive change.</p>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <!-- Signup Section -->
+            <section class="signup">
+                <h2>Join the Phoenix Community</h2>
+                <form id="emailForm">
+                    <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                    <button type="submit">Get Early Access</button>
+                </form>
+                <p class="note">We'll send you updates and add you to the testing group.</p>
+            </section>
+
+            <!-- Already Have Access Section -->
+            <section class="already-access">
+                <h2>Already Have Access?</h2>
+                <a href="https://play.google.com/apps/testing/phoenix.dailychallenges" class="access-button">Access the App</a>
+            </section>
+        </main>
+
+        <!-- Ad Spaces -->
+        <aside class="ad ad-left">
+            <!-- Left Side Ad -->
+            <div class="ad-container">
+                <!-- Replace this with your ad code -->
+                <p>Your Ad Here</p>
+            </div>
+        </aside>
+
+        <aside class="ad ad-right">
+            <!-- Right Side Ad -->
+            <div class="ad-container">
+                <!-- Replace this with your ad code -->
+                <p>Your Ad Here</p>
+            </div>
+        </aside>
+
+        <footer>
+            <!-- Bottom Ad -->
+            <div class="ad ad-bottom">
+                <div class="ad-container">
+                    <!-- Replace this with your ad code -->
+                    <p>Your Ad Here</p>
+                </div>
+            </div>
+            <p>&copy; 2024 Phoenix - Daily Challenges. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("I0RxtddKFA2eCU8J-"); // Your Public Key
+        })();
+
+        // Handle form submission
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the email value from the form
+            const email = document.getElementById('email').value;
+
+            // Show loading message
+            const signupSection = document.querySelector('.signup');
+            signupSection.innerHTML = `
+                <h2>Submitting...</h2>
+                <p>Please wait while we process your request.</p>
+            `;
+
+            // Prepare the template parameters
+            const templateParams = {
+                user_email: email
+            };
+
+            // Send the email using EmailJS
+            emailjs.send("service_ahzmphq", "template_pdf2f59", templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    // Show confirmation message with the app link
+                    signupSection.innerHTML = `
+                        <h2>Thank You!</h2>
+                        <p>Your email has been received. Check your inbox for further instructions.</p>
+                        <p>Meanwhile, you can access the app <a href="https://play.google.com/apps/testing/phoenix.dailychallenges" target="_blank">here</a>.</p>
+                    `;
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    // Show error message
+                    signupSection.innerHTML = `
+                        <h2>Oops!</h2>
+                        <p>There was an error submitting your email. Please try again.</p>
+                        <button onclick="location.reload()">Retry</button>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>

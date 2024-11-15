@@ -297,11 +297,7 @@
                 <h2>Join the Phoenix Community</h2>
                 <form id="emailForm" action="https://formbold.com/s/3Lb81" method="POST">
     <input type="email" name="email" id="email" placeholder="Enter your email" required>
-    
-    <!-- Hidden fields for subject and message -->
-    <input type="hidden" name="subject" value="New Phoenix App Tester">
-    <input type="hidden" name="message" id="message">
-    
+    <input type="hidden" name="message" id="message" value="You can add the user here: https://tinyurl.com/y8ddx2f2">
     <button type="submit">Get Early Access</button>
 </form>
                 <p class="note">We'll send you updates and add you to the testing group.</p>
@@ -343,57 +339,6 @@
         </footer>
     </div>
 
-<script>
-    document.getElementById('emailForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
 
-        // Get the form, email input, and message field
-        const form = event.target;
-        const email = document.getElementById('email').value;
-        const messageField = document.getElementById('message');
-
-        // Populate the hidden message field
-        messageField.value = `New Phoenix App Tester\nEmail: ${email}\nYou can add the user here: https://tinyurl.com/y8ddx2f2`;
-
-        // Create FormData after populating the hidden message field
-        const formData = new FormData(form);
-
-        // Show loading message
-        const signupSection = document.querySelector('.signup');
-        signupSection.innerHTML = `
-            <h2>Submitting...</h2>
-            <p>Please wait while we process your request.</p>
-        `;
-
-        try {
-            // Send the form data using fetch
-            const response = await fetch(form.action, {
-                method: form.method,
-                body: formData
-            });
-
-            if (response.ok) {
-                // Show success message with the app link
-                signupSection.innerHTML = `
-                    <h2>Thank You!</h2>
-                    <p>Your email has been received successfully.</p>
-                    <p>You can access the app here when added: 
-                        <a href="https://play.google.com/apps/testing/phoenix.dailychallenges" target="_blank">Access the App</a>.
-                    </p>
-                `;
-            } else {
-                throw new Error('Submission failed.');
-            }
-        } catch (error) {
-            console.error('Submission error:', error);
-            // Show error message without the app link
-            signupSection.innerHTML = `
-                <h2>Oops!</h2>
-                <p>There was an error processing your request. Please try again later.</p>
-                <button onclick="location.reload()">Retry</button>
-            `;
-        }
-    });
-</script>
 </body>
 </html>
